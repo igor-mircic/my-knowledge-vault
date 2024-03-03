@@ -2,7 +2,9 @@
 tags:
   - linux
 ---
-# Remapping Kensington Expert Trackball Buttons with wayland
+# Remapping buttons and configuring Kensington Expert Trackball with wayland and GNOME
+
+## Remapping buttons
 
 If you want to swap the order of buttons on your Kensington trackball mouse
 using `hwdb`, you'll first need to identify the device and then create an
@@ -104,5 +106,30 @@ sudo systemd-hwdb update
 sudo udevadm trigger
 ```
 
+## Configuring sensitivity and scroll wheel emulation on GNOME. Other compositors should have similar options
+
+We use gsettings for configuring GNOME settings from CLI. 
+1) Identify settings you want to change:
+
+```bash
+gsettings list-recursively | grep trackball
+```
+
+Use list-recursively to list all options then pipe to grep or fzf to filter for specific options. This is how I found out options to change. This are the options I changed: 
+
+```bash
+gsettings set org.gnome.desktop.peripherals.trackball accel-profile 'flat'
+gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
+gsettings set org.gnome.desktop.peripherals.mouse speed -0.25
+gsettings set org.gnome.desktop.peripherals.trackball scroll-wheel-emulation-button 8
+gsettings set org.gnome.desktop.peripherals.trackball scroll-wheel-emulation-button-lock true
+```
+
+I set accel-profile to 'flat' this turns off acceleration. For me it's better if it's off you might find it useful to explore other profiles. 
+Speed is self explanatory. I found it to be good around -0.2 to -0.5 and landed on -0.25. 
+I set scroll-wheel-emulation-button to 8 this back button. For me it's lower left that I press with my pinkie finger. And I also set lock to true. This means that when I press that button ball will act as bi-directional scroll. I find this to be really convenient if I have to scroll a lot.
+
 Source:
 - https://www.reddit.com/r/linux4noobs/comments/fih5aw/how_to_change_or_assign_the_mouse_buttons_in/
+Original author of note that i got this from:
+- https://github.com/aryklein/my-knowledge-vault/blob/main/cheat_sheets/linux/kensington_trackball.md
