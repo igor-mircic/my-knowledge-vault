@@ -1,4 +1,4 @@
-Personal repository for quickly accessing and organizing essential tech notes, cheat sheets, and reference materials. Designed specifically for use with Obsidian
+Personal repository for quickly accessing and organising essential tech notes, cheat sheets, and reference materials. Designed specifically for use with Obsidian
 
 I have made this repository publicly accessible in order to share my personal notes with you. However, please be mindful that they may contain inaccuracies, be incomplete, or become outdated over time.
 
